@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nuperous</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-color: #3b82f6;
+            /* Flat blue */
+            --border-color: #333333;
+        }
+
+        body.light-theme {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #0d6efd;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lexend', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-secondary);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .navbar-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 400;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .tab:not(.active):hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Main Container */
+        .container {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Search & Stats */
+        .header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .game-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.1s, border-color 0.1s;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
+
+        .game-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .game-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .fallback-initials {
+            position: relative;
+            z-index: 0;
+        }
+
+        .game-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* Intro Modal */
+        .intro-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .intro-modal-overlay.visible {
+            display: flex;
+        }
+
+        .intro-modal-content {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .intro-modal-content h2 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        .intro-modal-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .intro-modal-content button {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+            font-family: inherit;
+        }
+
+        .intro-modal-content button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">Project Nuperous</div>
+        <div class="navbar-tabs">
+            <div class="tab active" id="tab-games">Games</div>
+            <a class="tab" href="settings.html">Settings</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Games View -->
+        <div id="games-view">
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Search games...">
+                </div>
+                <div class="stats">
+                    <div>Total: <span id="total-count">0</span></div>
+                    <div>Visible: <span id="visible-count">0</span></div>
+                </div>
+            </div>
+
+
+
+            <main class="games-grid" id="grid">
+                <!-- Games will be injected here -->
+            </main>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Apply saved theme
+        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-theme');
+
+        let games = [];
+
+        const grid = document.getElementById('grid');
+        const searchInput = document.getElementById('search');
+        const totalCountEl = document.getElementById('total-count');
+        const visibleCountEl = document.getElementById('visible-count');
+
+        // Dynamic thumbnail generator logic
+        const colors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6', '#f43f5e', '#6366f1', '#84cc16'];
+
+        function getColorForTitle(title) {
+            let hash = 0;
+            for (let i = 0; i < title.length; i++) {
+                hash = title.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function getInitials(title) {
+            // Remove common prefixes and get first two chars
+            const cleanTitle = title.replace(/^(The|A|An)\s+/i, '').trim();
+            if (cleanTitle.length === 0) return '??';
+
+            const words = cleanTitle.split(/\s+/);
+            if (words.length >= 2) {
+                return (words[0][0] + words[1][0]).toUpperCase();
+            }
+            return cleanTitle.substring(0, 2).toUpperCase();
+        }
+
+        async function loadGames() {
+            try {
+                const gamesRes = await fetch('games.json');
+                
+                games = await gamesRes.json();
+                
+                totalCountEl.textContent = games.length;
+                renderGames();
+            } catch (error) {
+                console.error('Error loading games:', error);
+                grid.innerHTML = `<div class="no-results">Error loading games. Make sure you are using a local web server to view this file.</div>`;
+            }
+        }
+
+        loadGames();
+
+        function createGameCard(game) {
+            const title = game.Title || '';
+            const file = game.File || '';
+            
+            const card = document.createElement('a');
+            card.className = 'game-card';
+            card.href = `games/${file}`;
+            card.target = '_blank';
+
+            const displayTitle = title.trim() || file.replace('.html', '');
+            const bgColor = getColorForTitle(displayTitle);
+            const initials = getInitials(displayTitle);
+            const imagePath = `thumbnails/${file.replace('.html', '.jpg')}`;
+
+            card.innerHTML = `
+                <div class="game-thumbnail" style="background-color: ${bgColor};">
+                    <span class="fallback-initials">${escapeHtml(initials)}</span>
+                    <img src="${imagePath}" loading="lazy" onload="this.style.opacity=1;" onerror="this.remove();" style="opacity: 0; transition: opacity 0.3s;" alt="">
+                </div>
+                <div class="game-info">
+                    <div class="game-title">${escapeHtml(displayTitle)}</div>
+                </div>
+            `;
+
+            // Track click
+            card.addEventListener('click', () => {
+                // Save to recently played
+                try {
+                    let recent = JSON.parse(localStorage.getItem('recentlyPlayed') || '[]');
+                    recent = recent.filter(f => f !== file);
+                    recent.unshift(file);
+                    recent = recent.slice(0, 10); // Keep top 10
+                    localStorage.setItem('recentlyPlayed', JSON.stringify(recent));
+                } catch(e) { console.error('Error saving recent:', e); }
+            });
+
+            return card;
+        }
+
+        function renderGames(filter = '') {
+            grid.innerHTML = '';
+            
+            const searchTerms = filter.toLowerCase().split(' ').filter(t => t);
+            let count = 0;
+
+            // Main grid
+            games.forEach(game => {
+                const title = game.Title || '';
+                const file = game.File || '';
+
+                const match = searchTerms.length === 0 || searchTerms.every(term =>
+                    title.toLowerCase().includes(term) || file.toLowerCase().includes(term)
+                );
+
+                if (match) {
+                    count++;
+                    grid.appendChild(createGameCard(game));
+                }
+            });
+
+            visibleCountEl.textContent = count;
+
+            if (count === 0) {
+                grid.innerHTML = `<div class="no-results">No games found matching "${escapeHtml(filter)}"</div>`;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            renderGames(e.target.value);
+        });
+
+        // Check for intro modal
+        if (!localStorage.getItem('hasSeenIntro')) {
+            const introModal = document.getElementById('intro-modal');
+            introModal.classList.add('visible');
+            document.getElementById('close-intro-btn').addEventListener('click', () => {
+                introModal.classList.remove('visible');
+                localStorage.setItem('hasSeenIntro', 'true');
+            });
+        }
+    </script>
+
+    <!-- Intro Modal -->
+    <div class="intro-modal-overlay" id="intro-modal">
+        <div class="intro-modal-content">
+            <h2>Welcome to Project Nuperous! 🚀</h2>
+            <p>Please note that this portal is currently in <strong>Beta</strong>.</p>
+            <p>Some games might break or fail to load. If you encounter any issues, please report them to <strong>Nuper</strong>.</p>
+            <button id="close-intro-btn">Got it!</button>
+        </div>
+    </div>
+</body>
+
+</html>
