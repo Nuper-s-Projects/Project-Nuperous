@@ -43,7 +43,7 @@ Open [http://localhost:8080](http://localhost:8080).
 npx serve .
 ```
 
-### VS Code / Cursor
+### VS Code 
 
 Use the **Live Server** extension and open `index.html`.
 
