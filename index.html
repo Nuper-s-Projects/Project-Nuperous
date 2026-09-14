@@ -10,41 +10,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/portal.css">
   <script src="js/theme.js"></script>
+  <script type="module" src="vendor/simple-liquid-glass/web-component.esm.js"></script>
 </head>
 <body>
   <a class="skip" href="#grid">Skip to games</a>
-  <header class="nav">
-    <a class="brand" href="index.html">
-      <span class="mark">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
-      </span>
-      Project Nuperous
-    </a>
-    <div class="nav-search" id="search-box">
-      <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
-      <input id="search" type="search" placeholder="Search 500+ games" autocomplete="off" spellcheck="false" aria-label="Search games">
-      <span class="search-kbd">/</span>
-      <button class="search-clear" id="search-clear" type="button" aria-label="Clear search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-    <nav class="tabs">
-      <a class="tab active" href="index.html" aria-current="page">Library</a>
-      <a class="tab" href="settings.html">Settings</a>
-    </nav>
-  </header>
+  <liquid-glass class="nav-shell" radius="0" frost="0.14" blur="12" saturation="160" lens="rim" scale="110" displace="4" border-color="rgba(255,255,255,0.22)" data-liquid="flow" liquid="flow" liquid-speed="0.45">
+    <header class="nav">
+      <a class="brand" href="index.html">
+        <span class="mark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Project Nuperous
+      </a>
+      <liquid-glass class="search-shell" radius="14" frost="0.1" blur="14" saturation="150" lens="rim" scale="70" displace="3" border-color="rgba(255,255,255,0.18)">
+        <div class="nav-search" id="search-box">
+          <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+          <input id="search" type="search" placeholder="Search 500+ games" autocomplete="off" spellcheck="false" aria-label="Search games">
+          <span class="search-kbd">/</span>
+          <button class="search-clear" id="search-clear" type="button" aria-label="Clear search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+      </liquid-glass>
+      <nav class="tabs">
+        <a class="tab active" href="index.html" aria-current="page">Library</a>
+        <a class="tab" href="settings.html">Settings</a>
+      </nav>
+    </header>
+  </liquid-glass>
 
   <main class="wrap">
     <section class="hero">
       <div>
         <p class="kicker">Beta arcade</p>
         <h1>Play anything. Instantly.</h1>
-        <p class="lede">A glass launcher for hundreds of HTML games. Continue where you left off, pin favorites, and play in-page or in a new tab.</p>
+        <p class="lede">A liquid-glass launcher for hundreds of HTML games. Continue where you left off, pin favorites, and play in-page or in a new tab.</p>
       </div>
       <div class="stats">
-        <div class="stat glass"><b id="stat-total">0</b><span>In library</span></div>
-        <div class="stat glass"><b id="stat-visible">0</b><span>Showing</span></div>
-        <div class="stat glass"><b id="stat-favs">0</b><span>Favorites</span></div>
+        <liquid-glass class="stat-shell" radius="14" frost="0.12" blur="10" lens="convex" scale="85" displace="3" border-color="rgba(255,255,255,0.16)">
+          <div class="stat glass"><b id="stat-total">0</b><span>In library</span></div>
+        </liquid-glass>
+        <liquid-glass class="stat-shell" radius="14" frost="0.12" blur="10" lens="convex" scale="85" displace="3" border-color="rgba(255,255,255,0.16)">
+          <div class="stat glass"><b id="stat-visible">0</b><span>Showing</span></div>
+        </liquid-glass>
+        <liquid-glass class="stat-shell" radius="14" frost="0.12" blur="10" lens="convex" scale="85" displace="3" border-color="rgba(255,255,255,0.16)">
+          <div class="stat glass"><b id="stat-favs">0</b><span>Favorites</span></div>
+        </liquid-glass>
       </div>
     </section>
 
@@ -76,34 +87,39 @@
   </main>
 
   <div class="player" id="player" role="dialog" aria-modal="true" aria-labelledby="player-title">
-    <div class="player-bar">
-      <button class="icon-btn" id="close-player" type="button" aria-label="Close game">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="player-title" id="player-title">Game</div>
-      <button class="icon-btn" id="player-fav" type="button" aria-label="Favorite">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-      </button>
-      <button class="icon-btn" id="player-newtab" type="button" aria-label="Open in new tab">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5M19 5l-9 9"/><path d="M5 10v9h9"/></svg>
-      </button>
-      <button class="icon-btn" id="player-full" type="button" aria-label="Fullscreen">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
-      </button>
-    </div>
+    <liquid-glass class="player-shell" radius="0" frost="0.16" blur="12" saturation="150" lens="rim" scale="90" border-color="rgba(255,255,255,0.2)">
+      <div class="player-bar">
+        <button class="icon-btn" id="close-player" type="button" aria-label="Close game">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="player-title" id="player-title">Game</div>
+        <button class="icon-btn" id="player-fav" type="button" aria-label="Favorite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        </button>
+        <button class="icon-btn" id="player-newtab" type="button" aria-label="Open in new tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5M19 5l-9 9"/><path d="M5 10v9h9"/></svg>
+        </button>
+        <button class="icon-btn" id="player-full" type="button" aria-label="Fullscreen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </liquid-glass>
     <iframe id="player-frame" title="Game player" allow="autoplay; fullscreen; gamepad; keyboard-map"></iframe>
   </div>
 
   <div class="overlay" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
-    <div class="modal glass">
-      <p class="kicker">Welcome</p>
-      <h2 id="intro-title">Project Nuperous is in beta</h2>
-      <p>Some games may fail to load or break. If something goes sideways, report it to Nuper.</p>
-      <p>Press <b>/</b> anytime to search. Games open in the launcher unless you switch that in Settings.</p>
-      <button class="btn" id="close-intro" type="button"><span class="glare"></span>Got it</button>
-    </div>
+    <liquid-glass class="modal-shell" radius="24" frost="0.16" blur="14" saturation="160" lens="convex" scale="110" displace="4" border-color="rgba(255,255,255,0.28)" data-liquid="wobble" liquid="wobble" liquid-speed="0.55">
+      <div class="modal glass">
+        <p class="kicker">Welcome</p>
+        <h2 id="intro-title">Project Nuperous is in beta</h2>
+        <p>Some games may fail to load or break. If something goes sideways, report it to Nuper.</p>
+        <p>Press <b>/</b> anytime to search. Games open in the launcher unless you switch that in Settings.</p>
+        <button class="btn" id="close-intro" type="button"><span class="glare"></span>Got it</button>
+      </div>
+    </liquid-glass>
   </div>
 
+  <script src="js/liquid.js"></script>
   <script src="js/elastic.js"></script>
   <script src="js/library.js"></script>
 </body>

@@ -10,109 +10,133 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/portal.css">
   <script src="js/theme.js"></script>
+  <script type="module" src="vendor/simple-liquid-glass/web-component.esm.js"></script>
 </head>
 <body class="settings-page">
-  <header class="nav">
-    <a class="brand" href="index.html">
-      <span class="mark">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
-      </span>
-      Project Nuperous
-    </a>
-    <div></div>
-    <nav class="tabs">
-      <a class="tab" href="index.html">Library</a>
-      <a class="tab active" href="settings.html" aria-current="page">Settings</a>
-    </nav>
-  </header>
+  <liquid-glass class="nav-shell" radius="0" frost="0.14" blur="12" saturation="160" lens="rim" scale="110" displace="4" border-color="rgba(255,255,255,0.22)" data-liquid="flow" liquid="flow" liquid-speed="0.45">
+    <header class="nav">
+      <a class="brand" href="index.html">
+        <span class="mark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Project Nuperous
+      </a>
+      <div></div>
+      <nav class="tabs">
+        <a class="tab" href="index.html">Library</a>
+        <a class="tab active" href="settings.html" aria-current="page">Settings</a>
+      </nav>
+    </header>
+  </liquid-glass>
 
   <main class="wrap">
     <h1>Settings</h1>
 
-    <section class="group glass">
-      <div class="group-title">Appearance</div>
-      <div class="row">
-        <div>
-          <div class="label">Theme</div>
-          <div class="desc">Dark glass by default. System follows your OS.</div>
+    <liquid-glass class="group-shell" radius="16" frost="0.12" blur="12" saturation="150" lens="rim" scale="90" border-color="rgba(255,255,255,0.16)">
+      <section class="group glass">
+        <div class="group-title">Appearance</div>
+        <div class="row">
+          <div>
+            <div class="label">Theme</div>
+            <div class="desc">Dark glass by default. System follows your OS.</div>
+          </div>
+          <select class="select" id="theme-select">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="system">System</option>
+          </select>
         </div>
-        <select class="select" id="theme-select">
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-          <option value="system">System</option>
-        </select>
-      </div>
-      <div class="row">
-        <div>
-          <div class="label">Grid density</div>
-          <div class="desc">Compact shows more covers per row.</div>
+        <div class="row">
+          <div>
+            <div class="label">Liquid glass</div>
+            <div class="desc">Apple-style refraction via simple-liquid-glass. Off falls back to flat panels.</div>
+          </div>
+          <select class="select" id="liquid-select">
+            <option value="on">Refraction</option>
+            <option value="blur">Frosted</option>
+            <option value="off">Off</option>
+          </select>
         </div>
-        <select class="select" id="density-select">
-          <option value="comfortable">Comfortable</option>
-          <option value="compact">Compact</option>
-        </select>
-      </div>
-      <div class="row">
-        <div>
-          <div class="label">Motion</div>
-          <div class="desc">Cuts hover stretch and glare tracking.</div>
+        <div class="row">
+          <div>
+            <div class="label">Grid density</div>
+            <div class="desc">Compact shows more covers per row.</div>
+          </div>
+          <select class="select" id="density-select">
+            <option value="comfortable">Comfortable</option>
+            <option value="compact">Compact</option>
+          </select>
         </div>
-        <select class="select" id="motion-select">
-          <option value="0">Full</option>
-          <option value="1">Reduced</option>
-        </select>
-      </div>
-    </section>
+        <div class="row">
+          <div>
+            <div class="label">Motion</div>
+            <div class="desc">Cuts hover stretch, glare tracking, and liquid warp.</div>
+          </div>
+          <select class="select" id="motion-select">
+            <option value="0">Full</option>
+            <option value="1">Reduced</option>
+          </select>
+        </div>
+      </section>
+    </liquid-glass>
 
-    <section class="group glass">
-      <div class="group-title">Play</div>
-      <div class="row">
-        <div>
-          <div class="label">Open games</div>
-          <div class="desc">Launcher overlay keeps you in the portal. New tab is the old behavior.</div>
+    <liquid-glass class="group-shell" radius="16" frost="0.12" blur="12" saturation="150" lens="rim" scale="90" border-color="rgba(255,255,255,0.16)">
+      <section class="group glass">
+        <div class="group-title">Play</div>
+        <div class="row">
+          <div>
+            <div class="label">Open games</div>
+            <div class="desc">Launcher overlay keeps you in the portal. New tab is the old behavior.</div>
+          </div>
+          <select class="select" id="play-select">
+            <option value="overlay">In launcher</option>
+            <option value="tab">New tab</option>
+          </select>
         </div>
-        <select class="select" id="play-select">
-          <option value="overlay">In launcher</option>
-          <option value="tab">New tab</option>
-        </select>
-      </div>
-    </section>
+      </section>
+    </liquid-glass>
 
-    <section class="group glass">
-      <div class="group-title">Library data</div>
-      <div class="row">
-        <div>
-          <div class="label">Continue playing</div>
-          <div class="desc" id="recent-desc">Clears the continue rail on this browser.</div>
+    <liquid-glass class="group-shell" radius="16" frost="0.12" blur="12" saturation="150" lens="rim" scale="90" border-color="rgba(255,255,255,0.16)">
+      <section class="group glass">
+        <div class="group-title">Library data</div>
+        <div class="row">
+          <div>
+            <div class="label">Continue playing</div>
+            <div class="desc" id="recent-desc">Clears the continue rail on this browser.</div>
+          </div>
+          <button class="btn ghost" id="clear-recent" type="button"><span class="glare"></span>Clear</button>
         </div>
-        <button class="btn ghost" id="clear-recent" type="button"><span class="glare"></span>Clear</button>
-      </div>
-      <div class="row">
-        <div>
-          <div class="label">Favorites</div>
-          <div class="desc" id="fav-desc">Removes pinned games on this browser.</div>
+        <div class="row">
+          <div>
+            <div class="label">Favorites</div>
+            <div class="desc" id="fav-desc">Removes pinned games on this browser.</div>
+          </div>
+          <button class="btn ghost" id="clear-favs" type="button"><span class="glare"></span>Clear</button>
         </div>
-        <button class="btn ghost" id="clear-favs" type="button"><span class="glare"></span>Clear</button>
-      </div>
-    </section>
+      </section>
+    </liquid-glass>
 
-    <section class="group glass">
-      <div class="group-title">About</div>
-      <div class="row">
-        <div>
-          <div class="label">Project Nuperous</div>
-          <div class="desc">Static HTML launcher. Beta — some titles may fail. Report issues to Nuper.</div>
+    <liquid-glass class="group-shell" radius="16" frost="0.12" blur="12" saturation="150" lens="rim" scale="90" border-color="rgba(255,255,255,0.16)">
+      <section class="group glass">
+        <div class="group-title">About</div>
+        <div class="row">
+          <div>
+            <div class="label">Project Nuperous</div>
+            <div class="desc">Static HTML launcher. Liquid glass from <a href="https://github.com/lucaperullo/simple-liquid-glass">simple-liquid-glass</a>. Beta — some titles may fail. Report issues to Nuper.</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </liquid-glass>
   </main>
 
+  <script src="js/liquid.js"></script>
   <script src="js/elastic.js"></script>
   <script>
     const themeSelect = document.getElementById("theme-select");
     const densitySelect = document.getElementById("density-select");
     const motionSelect = document.getElementById("motion-select");
     const playSelect = document.getElementById("play-select");
+    const liquidSelect = document.getElementById("liquid-select");
 
     function listLen(key) {
       try {
@@ -132,6 +156,7 @@
     densitySelect.value = localStorage.getItem("gridDensity") || "comfortable";
     motionSelect.value = localStorage.getItem("reduceMotion") === "1" ? "1" : "0";
     playSelect.value = localStorage.getItem("playMode") || "overlay";
+    liquidSelect.value = window.NuperousGlass.get();
     refreshCounts();
 
     themeSelect.addEventListener("change", () => window.NuperousTheme.set(themeSelect.value));
@@ -142,8 +167,10 @@
     motionSelect.addEventListener("change", () => {
       localStorage.setItem("reduceMotion", motionSelect.value);
       window.NuperousTheme.applyBodyPrefs();
+      window.NuperousGlass.apply();
     });
     playSelect.addEventListener("change", () => localStorage.setItem("playMode", playSelect.value));
+    liquidSelect.addEventListener("change", () => window.NuperousGlass.set(liquidSelect.value));
     document.getElementById("clear-recent").addEventListener("click", () => {
       localStorage.removeItem("recentlyPlayed");
       refreshCounts();
