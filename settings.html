@@ -1,212 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings – Project Nuperous</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --bg-tertiary: #2a2a2a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent-color: #3b82f6;
-            --border-color: #333333;
-        }
-
-        body.light-theme {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #e9ecef;
-            --text-primary: #212529;
-            --text-secondary: #6c757d;
-            --accent-color: #0d6efd;
-            --border-color: #dee2e6;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Lexend', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--bg-secondary);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .navbar-tabs {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .tab {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 400;
-            transition: background-color 0.2s;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .tab.active {
-            background-color: var(--accent-color);
-            color: #fff;
-        }
-
-        .tab:not(.active):hover {
-            background-color: var(--bg-tertiary);
-        }
-
-        .container {
-            flex: 1;
-            padding: 2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .settings-group {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .settings-group-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .setting-row:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .setting-row:first-child {
-            padding-top: 0;
-        }
-
-        .setting-label {
-            font-size: 1rem;
-        }
-
-        .setting-desc {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            margin-top: 0.2rem;
-        }
-
-        select {
-            padding: 0.4rem 0.8rem;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070f">
+  <title>Settings – Project Nuperous</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/portal.css">
+  <script src="js/theme.js"></script>
 </head>
-
-<body>
-
-    <nav class="navbar">
-        <a class="navbar-brand" href="index.html">Project Nuperous</a>
-        <div class="navbar-tabs">
-            <a class="tab" href="index.html">Games</a>
-            <div class="tab active">Settings</div>
-        </div>
+<body class="settings-page">
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <span class="mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+      Project Nuperous
+    </a>
+    <div></div>
+    <nav class="tabs">
+      <a class="tab" href="index.html">Library</a>
+      <a class="tab active" href="settings.html" aria-current="page">Settings</a>
     </nav>
+  </header>
 
-    <div class="container">
-        <h1>Settings</h1>
+  <main class="wrap">
+    <h1>Settings</h1>
 
-        <div class="settings-group">
-            <div class="settings-group-title">Appearance</div>
-
-            <div class="setting-row">
-                <div>
-                    <div class="setting-label">Theme</div>
-                    <div class="setting-desc">Switch between dark and light mode</div>
-                </div>
-                <select id="theme-select" onchange="changeTheme(this.value)">
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
-                </select>
-            </div>
+    <section class="group glass">
+      <div class="group-title">Appearance</div>
+      <div class="row">
+        <div>
+          <div class="label">Theme</div>
+          <div class="desc">Dark glass by default. System follows your OS.</div>
         </div>
-    </div>
+        <select class="select" id="theme-select">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="system">System</option>
+        </select>
+      </div>
+      <div class="row">
+        <div>
+          <div class="label">Grid density</div>
+          <div class="desc">Compact shows more covers per row.</div>
+        </div>
+        <select class="select" id="density-select">
+          <option value="comfortable">Comfortable</option>
+          <option value="compact">Compact</option>
+        </select>
+      </div>
+      <div class="row">
+        <div>
+          <div class="label">Motion</div>
+          <div class="desc">Cuts hover stretch and glare tracking.</div>
+        </div>
+        <select class="select" id="motion-select">
+          <option value="0">Full</option>
+          <option value="1">Reduced</option>
+        </select>
+      </div>
+    </section>
 
-    <script>
-        // Load saved theme on page open
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.getElementById('theme-select').value = savedTheme;
-        if (savedTheme === 'light') document.body.classList.add('light-theme');
+    <section class="group glass">
+      <div class="group-title">Play</div>
+      <div class="row">
+        <div>
+          <div class="label">Open games</div>
+          <div class="desc">Launcher overlay keeps you in the portal. New tab is the old behavior.</div>
+        </div>
+        <select class="select" id="play-select">
+          <option value="overlay">In launcher</option>
+          <option value="tab">New tab</option>
+        </select>
+      </div>
+    </section>
 
-        function changeTheme(theme) {
-            localStorage.setItem('theme', theme);
-            if (theme === 'light') {
-                document.body.classList.add('light-theme');
-            } else {
-                document.body.classList.remove('light-theme');
-            }
-        }
-    </script>
+    <section class="group glass">
+      <div class="group-title">Library data</div>
+      <div class="row">
+        <div>
+          <div class="label">Continue playing</div>
+          <div class="desc" id="recent-desc">Clears the continue rail on this browser.</div>
+        </div>
+        <button class="btn ghost" id="clear-recent" type="button"><span class="glare"></span>Clear</button>
+      </div>
+      <div class="row">
+        <div>
+          <div class="label">Favorites</div>
+          <div class="desc" id="fav-desc">Removes pinned games on this browser.</div>
+        </div>
+        <button class="btn ghost" id="clear-favs" type="button"><span class="glare"></span>Clear</button>
+      </div>
+    </section>
 
+    <section class="group glass">
+      <div class="group-title">About</div>
+      <div class="row">
+        <div>
+          <div class="label">Project Nuperous</div>
+          <div class="desc">Static HTML launcher. Beta — some titles may fail. Report issues to Nuper.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/elastic.js"></script>
+  <script>
+    const themeSelect = document.getElementById("theme-select");
+    const densitySelect = document.getElementById("density-select");
+    const motionSelect = document.getElementById("motion-select");
+    const playSelect = document.getElementById("play-select");
+
+    function listLen(key) {
+      try {
+        const value = JSON.parse(localStorage.getItem(key) || "[]");
+        return Array.isArray(value) ? value.length : 0;
+      } catch {
+        return 0;
+      }
+    }
+
+    function refreshCounts() {
+      document.getElementById("recent-desc").textContent = `${listLen("recentlyPlayed")} saved on this device.`;
+      document.getElementById("fav-desc").textContent = `${listLen("favorites")} pinned on this device.`;
+    }
+
+    themeSelect.value = window.NuperousTheme.get();
+    densitySelect.value = localStorage.getItem("gridDensity") || "comfortable";
+    motionSelect.value = localStorage.getItem("reduceMotion") === "1" ? "1" : "0";
+    playSelect.value = localStorage.getItem("playMode") || "overlay";
+    refreshCounts();
+
+    themeSelect.addEventListener("change", () => window.NuperousTheme.set(themeSelect.value));
+    densitySelect.addEventListener("change", () => {
+      localStorage.setItem("gridDensity", densitySelect.value);
+      window.NuperousTheme.applyBodyPrefs();
+    });
+    motionSelect.addEventListener("change", () => {
+      localStorage.setItem("reduceMotion", motionSelect.value);
+      window.NuperousTheme.applyBodyPrefs();
+    });
+    playSelect.addEventListener("change", () => localStorage.setItem("playMode", playSelect.value));
+    document.getElementById("clear-recent").addEventListener("click", () => {
+      localStorage.removeItem("recentlyPlayed");
+      refreshCounts();
+    });
+    document.getElementById("clear-favs").addEventListener("click", () => {
+      localStorage.removeItem("favorites");
+      refreshCounts();
+    });
+  </script>
 </body>
-
 </html>
